@@ -1,0 +1,36 @@
+html,
+body {
+    font-family: sans-serif;
+    width: 100vw;
+    height: 100vh;
+    background: #f3f4f7;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box-or {
+    text-transform: lowercase;
+    border: 1px solid #e2e1e2;
+    border-radius: 40px;
+    padding: 5px;
+    display: block;
+    width: 45px;
+    margin: 0 auto;
+    text-align: center;
+    color: #085a8c;
+    font-weight: 700;
+    height: 45px;
+    line-height: 32px;
+    box-sizing: border-box;
+    margin-bottom: -40px;
+    position: relative;
+    z-index: 1;
+    background: #fff;
+    word-wrap: normal;
+    white-space: nowrap
+}
