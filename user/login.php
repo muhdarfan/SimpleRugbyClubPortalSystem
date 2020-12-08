@@ -2,7 +2,7 @@
 include "../core.php";
 if(isset($_SESSION['loggedin']))
     header("Location: home.php");
-    
+
 $Error = "";
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
@@ -13,8 +13,8 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         $DB->where("(username = ? or userEmail = ?)", Array($User, $User));
         $DB->where("userPass", $Pass);
         $Res = $DB->getOne("tbl_users", Array('userID'));
-        
-        if ($Res['userID']) {
+
+        if (!empty($Res) && !empty($Res['userID'])) {
             $_SESSION['loggedin'] = true;
             $_SESSION['user'] = true;
             $_SESSION['id'] = $Res['userID'];

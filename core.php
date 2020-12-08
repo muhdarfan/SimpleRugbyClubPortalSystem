@@ -26,7 +26,7 @@ if (isset($_SESSION['loggedin'])) {
         session_destroy();
     }
 } else {
-    if (strpos($_SERVER['SCRIPT_NAME'], "/user/") !== false && $_SERVER['SCRIPT_NAME'] != "/user/login.php") {
+    if (strpos($_SERVER['SCRIPT_NAME'], "/user/") !== false && $_SERVER['SCRIPT_NAME'] != "/user/login.php" && $_SERVER['SCRIPT_NAME'] != "/user/register.php") {
         header("LOCATION: /user/login.php");
     } elseif (strpos($_SERVER['SCRIPT_NAME'], "/admin/") !== false && $_SERVER['SCRIPT_NAME'] != "/admin/login.php") {
         header("LOCATION: /admin/login.php");
