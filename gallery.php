@@ -21,18 +21,15 @@ include 'core.php';
 			<div class="panel-heading">
 				<h3 class="panel-title">Gallery</h3>
 			</div>
-			
+
 			<div class="panel-body">
-                <h2>asd</h2>
-                <p>asd</p>
-                <hr />
                 <?php
                 if (isset($_GET['view'])) {
                     $DB->where('album_id', intval($_GET['view']));
-                    
+
                 }
 				$Albums = $DB->get("tbl_albums");
-				
+
 				if (count($Albums) > 0) {
 					echo '<div class="row">';
 					foreach ($Albums as $Album) {
@@ -57,7 +54,7 @@ include 'core.php';
 				?>
 			</div>
 		</div>
-		
+
 	</div>
 
 	<?php include 'includes/footer.php'; ?>

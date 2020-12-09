@@ -18,12 +18,12 @@ include 'core.php';
 	<div class="container">
 		<?php
 		if (isset($_GET['id'])) {
-			$DB->where(intval($_GET['id']));
+			$DB->where('newsID', intval($_GET['id']));
 			$News = $DB->getOne('tbl_news');
 			?>
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<h2><?php echo $News['title']; ?></h2><hr />					
+					<h2><?php echo $News['title']; ?></h2><hr />
 					<img src="assets/img/news/<?php echo $News['img_url']; ?>" class="img-rounded" width="100%" height="360">
 					<p class="text-center text-muted"><?php echo $News['desc']; ?></p>
 					<p class="text-justify">
@@ -44,7 +44,7 @@ include 'core.php';
 			<ul class="list-group list-group-flush">
 				<?php
 				$page = (isset($_GET['page']) ? intval($_GET['page']) : 1);
-				$DB->pageLimit = 2;
+				$DB->pageLimit = 10;
 				$News = $DB->arraybuilder()->paginate("tbl_news", $page);
 
 				foreach ($News as $NewsData) {
@@ -67,7 +67,7 @@ include 'core.php';
 					</li>
 					<?php
 				}
-				
+
 				echo "showing $page out of " . $DB->totalPages;
 				?>
 			</ul>

@@ -12,17 +12,15 @@ $DB = new MysqliDb($Config['Database']['host'], $Config['Database']['user'], $Co
 $DB->setTrace (true); // Debug
 
 if (isset($_SESSION['loggedin'])) {
-    $ID = intval($_SESSION['id']);
-
     if (isset($_SESSION['user'])) {
-        $DB->where('userID', $ID);
+        $DB->where('userID', intval($_SESSION['id']));
         $User = $DB->objectBuilder()->getOne('tbl_users');
     } elseif (isset($_SESSION['admin'])) {
-        $DB->where('adminID', $ID);
-        $User = $DB->objectBuilder()->getOne('tbl_admin');
+        $DB->where('adminID', intval($_SESSION['aID']));
+        $Admin = $DB->objectBuilder()->getOne('tbl_admin');
     }
 
-    if (empty($User)) {
+    if (empty($User) && empty($Admin)) {
         session_destroy();
     }
 } else {

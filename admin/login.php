@@ -17,7 +17,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         if ($Res['adminID']) {
             $_SESSION['loggedin'] = true;
             $_SESSION['admin'] = true;
-            $_SESSION['id'] = $Res['adminID'];
+            $_SESSION['aID'] = $Res['adminID'];
 
             header("LOCATION: home.php");
         } else {

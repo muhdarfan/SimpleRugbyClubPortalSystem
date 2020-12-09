@@ -18,14 +18,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 } elseif ($_GET['action'] == 'edit') {
                     $ID = intval($_POST['editID']);
 
-                    $Username = htmlspecialchars($_POST['eUsername']);
+                    $Adminname = htmlspecialchars($_POST['eUsername']);
                     $Email = htmlspecialchars($_POST['eEmail']);
                     $Matric = htmlspecialchars($_POST['eMatric']);
                     $Phone = $_POST['ePhone'];
 
                     $DB->where('userID', $ID);
                     $DB->update('tbl_users', array(
-                        'username' => $Username,
+                        'username' => $Adminname,
                         'userNoMatric' => $Matric,
                         'userEmail' => $Email,
                         'userPhone' => $Phone,
@@ -45,17 +45,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $DB->insert('tbl_admin', $AddData);
                 } elseif ($_GET['action'] == 'edit') {
                     $ID = intval($_POST['editID']);
-                    $Username = htmlspecialchars($_POST['eUsername']);
+                    $Adminname = htmlspecialchars($_POST['eUsername']);
                     $Email = htmlspecialchars($_POST['eEmail']);
 
                     $DB->where('adminID', $ID);
                     $DB->update('tbl_admin', array(
-                        'adminUsername' => $Username,
+                        'adminUsername' => $Adminname,
                         'adminEmail' => $Email
                     ));
                 }
                 break;
         }
+
+        header("LOCATION: users.php?view={$_GET['view']}");
     }
 }
 ?>
@@ -65,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?php echo $User->adminUsername; ?> - Home</title>
+    <title><?php echo $Admin->adminUsername; ?> - Home</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
@@ -73,7 +75,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
 <div class="container">
-
     <div class="page-header" style="border-bottom: 1px #000 solid;">
         <h1>UMP Rugby Club <small>Admin Panel</small></h1>
         <nav class="navbar navbar-default">
@@ -96,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false"><?php echo $User->adminUsername; ?> <span
+                               aria-haspopup="true" aria-expanded="false"><?php echo $Admin->adminUsername; ?> <span
                                         class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="profile.php">Edit Profile</a></li>
@@ -143,6 +144,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     include 'frame/editUser.php';
                                     break;
                                 case "delete":
+                                    if ($_GET['view'] == 'admin' && intval($_GET['id'])) {
+                                        $DB->where('adminID', $_GET['id']);
+                                        $DB->delete('tbl_admin');
+                                    } elseif ($_GET['view'] == 'user' && intval($_GET['id'])) {
+                                        $DB->where('userID', $_GET['id']);
+                                        $DB->delete('tbl_users');
+                                    } else {
+                                        header("LOCATION: users.php");
+                                    }
+                                    header("LOCATION: users.php?view={$_GET['view']}");
                                     break;
                                 default:
                                     header("LOCATION: users.php");
@@ -211,5 +222,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
         integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
         crossorigin="anonymous"></script>
+<script>
+    $(".btn-delete").click(function () {
+        return confirm("Are you sure want to delete this news?");
+    });
+</script>
 </body>
 </html>
