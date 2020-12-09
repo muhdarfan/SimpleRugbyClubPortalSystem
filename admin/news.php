@@ -170,6 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 								$DB->where('newsID', intval($_GET['id']));
 								$DB->delete('tbl_news');
+
 								echo "<div class='alert alert-danger' role='alert'>News has been deleted.</div>";
 								break;
 							}

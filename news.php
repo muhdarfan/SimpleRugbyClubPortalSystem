@@ -45,6 +45,7 @@ include 'core.php';
 				<?php
 				$page = (isset($_GET['page']) ? intval($_GET['page']) : 1);
 				$DB->pageLimit = 10;
+				$DB->orderBy("date", "Desc");
 				$News = $DB->arraybuilder()->paginate("tbl_news", $page);
 
 				foreach ($News as $NewsData) {

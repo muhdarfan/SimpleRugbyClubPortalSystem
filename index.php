@@ -21,6 +21,7 @@ include 'core.php';
 				<!-- Indicators -->
 				<ol class="carousel-indicators">
 					<?php
+					$DB->orderBy("date", "Desc");
 					$News = $DB->get("tbl_news", 5);
 					$count = 0;
 					foreach($News as $NewsData) {
