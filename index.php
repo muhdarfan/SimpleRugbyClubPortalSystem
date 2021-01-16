@@ -49,7 +49,21 @@ include 'core.php';
 
 		<h1 style="color: #fff;">Next Match</h1>
 		<div class="row match-list">
-			<div class="col-xs-6 col-md-3">
+			<div class="col-xs-6 col-md-4">
+				<div class="thumbnail">
+					<img src="http://placehold.it/190x120" >
+					<div class="caption">
+						<p class="text-center">
+                            Date: 25 March 2021<br />
+                            Kick-off Time: <b>TBC</b><br/>
+                            Venue: <b>TBC</b><br/><br/>
+
+                            <b>2022 World Cup/2023 Asian Cup Qualifiers Round 2 (Group G)</b>
+                        </p>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-4">
 				<div class="thumbnail">
 					<img src="http://placehold.it/190x120" >
 					<div class="caption">
@@ -57,23 +71,7 @@ include 'core.php';
 					</div>
 				</div>
 			</div>
-			<div class="col-xs-6 col-md-3">
-				<div class="thumbnail">
-					<img src="http://placehold.it/190x120" >
-					<div class="caption">
-						<p class="text-center">...</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-6 col-md-3">
-				<div class="thumbnail">
-					<img src="http://placehold.it/190x120" >
-					<div class="caption">
-						<p class="text-center">...</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-6 col-md-3">
+			<div class="col-xs-6 col-md-4">
 				<div class="thumbnail">
 					<img src="http://placehold.it/190x120" >
 					<div class="caption">
@@ -82,6 +80,14 @@ include 'core.php';
 				</div>
 			</div>
 		</div>
+
+        <h1 style="color: #fff;">Tournaments</h1>
+        <div class="row match-list">
+            <div class="col-xs-6 col-md-3">
+                <img src="http://placehold.it/190x120" >
+            </div>
+
+        </div>
 
 	</div>
 

@@ -112,8 +112,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 						<ul class="nav navbar-nav">
 							<li><a href="home.php">Home</a></li>
 							<li class="active"><a href="news.php">News</a></li>
-							<li><a href="gallery.php">Gallery</a></li>
 							<li><a href="users.php">Users</a></li>
+                            <li><a href="photos.php">Photos</a></li>
 						</ul>
 
 						<ul class="nav navbar-nav navbar-right">

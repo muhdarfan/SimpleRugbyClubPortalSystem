@@ -23,7 +23,8 @@
 				<li class="<?php echo ($_SERVER['SCRIPT_NAME'] == '/gallery.php') ? 'active' : ''; ?>"><a href="gallery.php">Gallery</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="user/login.php">Login</a></li>
+                <li class="<?php echo ($_SERVER['SCRIPT_NAME'] == '/upload.php') ? 'active' : ''; ?>"><a href="upload.php">Upload</a></li>
+                <li class="<?php echo ($_SERVER['SCRIPT_NAME'] == '/register.php') ? 'active' : ''; ?>"><a href="register.php">Register</a></li>
 			</ul>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->

@@ -50,7 +50,6 @@ if (isset($_POST['pass']) && isset($_POST['cPass'])) {
 						<ul class="nav navbar-nav">
 							<li><a href="home.php">Home</a></li>
 							<li><a href="news.php">News</a></li>
-							<li><a href="gallery.php">Gallery</a></li>
 							<li><a href="users.php">Users</a></li>
 						</ul>
 

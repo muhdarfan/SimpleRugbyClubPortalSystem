@@ -72,6 +72,19 @@ include 'core.php';
 				echo "showing $page out of " . $DB->totalPages;
 				?>
 			</ul>
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li><a href="?page=1">First</a></li>
+                    <li class="<?php if($page <= 1){ echo 'disabled'; } ?>">
+                        <a href="<?php if($page <= 1){ echo '#'; } else { echo "?page=".($page - 1); } ?>">Prev</a>
+                    </li>
+                    <li class="<?php if($page >= $DB->totalPages){ echo 'disabled'; } ?>">
+                        <a href="<?php if($page >= $DB->totalPages){ echo '#'; } else { echo "?page=".($page + 1); } ?>">Next</a>
+                    </li>
+                    <li><a href="?page=<?php echo $DB->totalPages; ?>">Last</a></li>
+                </ul>
+            </nav>
+
 			<?php
 		}
 		?>

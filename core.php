@@ -12,21 +12,16 @@ $DB = new MysqliDb($Config['Database']['host'], $Config['Database']['user'], $Co
 $DB->setTrace (true); // Debug
 
 if (isset($_SESSION['loggedin'])) {
-    if (isset($_SESSION['user'])) {
-        $DB->where('userID', intval($_SESSION['id']));
-        $User = $DB->objectBuilder()->getOne('tbl_users');
-    } elseif (isset($_SESSION['admin'])) {
+    if (isset($_SESSION['admin'])) {
         $DB->where('adminID', intval($_SESSION['aID']));
         $Admin = $DB->objectBuilder()->getOne('tbl_admin');
     }
 
-    if (empty($User) && empty($Admin)) {
+    if (empty($Admin)) {
         session_destroy();
     }
 } else {
-    if (strpos($_SERVER['SCRIPT_NAME'], "/user/") !== false && $_SERVER['SCRIPT_NAME'] != "/user/login.php" && $_SERVER['SCRIPT_NAME'] != "/user/register.php") {
-        header("LOCATION: /user/login.php");
-    } elseif (strpos($_SERVER['SCRIPT_NAME'], "/admin/") !== false && $_SERVER['SCRIPT_NAME'] != "/admin/login.php") {
+    if (strpos($_SERVER['SCRIPT_NAME'], "/admin/") !== false && $_SERVER['SCRIPT_NAME'] != "/admin/login.php") {
         header("LOCATION: /admin/login.php");
     }
 }

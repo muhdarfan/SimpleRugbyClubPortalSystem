@@ -4,7 +4,7 @@ include '../core.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_GET['view'])) {
         switch ($_GET['view']) {
-            case 'user':
+            case 'application':
                 if ($_GET['action'] == 'add') {
                     $AddData = array(
                         'username' => htmlspecialchars($_POST['username']),
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?php echo $Admin->adminUsername; ?> - Home</title>
+    <title><?php echo $Admin->adminUsername; ?> - Users Management</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
@@ -90,8 +90,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <ul class="nav navbar-nav">
                         <li><a href="home.php">Home <span class="sr-only">(current)</span></a></li>
                         <li><a href="news.php">News</a></li>
-                        <li><a href="gallery.php">Gallery</a></li>
                         <li class="active"><a href="users.php">Users</a></li>
+                        <li><a href="photos.php">Photos</a></li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
@@ -118,8 +118,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="panel-body">
                     <ul class="nav nav-pills nav-stacked">
                         <li role="presentation"
-                            class="<?php echo (isset($_GET['view']) && $_GET['view'] == 'user') ? 'active' : '' ?>"><a
-                                    href="?view=user">User</a></li>
+                            class="<?php echo (isset($_GET['view']) && $_GET['view'] == 'application') ? 'active' : '' ?>"><a
+                                    href="?view=application">Application</a></li>
                         <li role="presentation"
                             class="<?php echo (isset($_GET['view']) && $_GET['view'] == 'admin') ? 'active' : '' ?>"><a
                                     href="?view=admin">Admin</a></li>
@@ -161,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             }
                         } else {
                             switch ($_GET['view']) {
-                                case "user":
+                                case "application":
                                     $Data = $DB->get("tbl_users", null, array('userID as id', 'username', 'userNoMatric', 'userEmail as email'));
                                     break;
 
@@ -180,7 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <thead>
                                     <tr>
                                         <th style="width: 5%;">#</th>
-                                        <?php echo ($_GET['view'] == 'user' || $_GET['view'] != 'admin') ? "<th>Matric</th>" : '' ?>
+                                        <?php echo ($_GET['view'] == 'application' || $_GET['view'] != 'admin') ? "<th>Matric</th>" : '' ?>
                                         <th>Username</th>
                                         <th>Email</th>
                                         <th style="width: 25%;">Action</th>

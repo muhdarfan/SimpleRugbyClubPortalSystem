@@ -1,2 +1,4 @@
 pull.php
 *.zip
+assets/img/uploads/*
+assets/img/gallery/*
