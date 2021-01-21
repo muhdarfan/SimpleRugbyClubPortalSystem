@@ -7,29 +7,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             case 'application':
                 if ($_GET['action'] == 'add') {
                     $AddData = array(
-                        'username' => htmlspecialchars($_POST['username']),
+                        'name' => htmlspecialchars($_POST['name']),
                         'userNoMatric' => htmlspecialchars($_POST['matric']),
                         'userEmail' => $_POST['email'],
-                        'userPass' => $_POST['password'],
                         'userPhone' => $_POST['phone'],
                     );
 
-                    $DB->insert('tbl_users', $AddData);
+                    $DB->insert('tbl_application', $AddData);
                 } elseif ($_GET['action'] == 'edit') {
                     $ID = intval($_POST['editID']);
 
-                    $Adminname = htmlspecialchars($_POST['eUsername']);
+                    $Name = htmlspecialchars($_POST['eName']);
                     $Email = htmlspecialchars($_POST['eEmail']);
                     $Matric = htmlspecialchars($_POST['eMatric']);
                     $Phone = $_POST['ePhone'];
 
                     $DB->where('userID', $ID);
-                    $DB->update('tbl_users', array(
-                        'username' => $Adminname,
+                    $DB->update('tbl_application', array(
+                        'name' => $Name,
                         'userNoMatric' => $Matric,
                         'userEmail' => $Email,
                         'userPhone' => $Phone,
-                        'userPass' => $_POST['ePassword']
                     ));
                 }
                 break;
@@ -147,9 +145,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     if ($_GET['view'] == 'admin' && intval($_GET['id'])) {
                                         $DB->where('adminID', $_GET['id']);
                                         $DB->delete('tbl_admin');
-                                    } elseif ($_GET['view'] == 'user' && intval($_GET['id'])) {
+                                    } elseif ($_GET['view'] == 'application' && intval($_GET['id'])) {
                                         $DB->where('userID', $_GET['id']);
-                                        $DB->delete('tbl_users');
+                                        $DB->delete('tbl_application');
                                     } else {
                                         header("LOCATION: users.php");
                                     }
@@ -162,7 +160,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         } else {
                             switch ($_GET['view']) {
                                 case "application":
-                                    $Data = $DB->get("tbl_users", null, array('userID as id', 'username', 'userNoMatric', 'userEmail as email'));
+                                    $Data = $DB->get("tbl_application", null, array('userID as id', 'name', 'userNoMatric', 'userEmail as email'));
                                     break;
 
                                 case "admin":
@@ -181,7 +179,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <tr>
                                         <th style="width: 5%;">#</th>
                                         <?php echo ($_GET['view'] == 'application' || $_GET['view'] != 'admin') ? "<th>Matric</th>" : '' ?>
-                                        <th>Username</th>
+                                        <th>Name</th>
                                         <th>Email</th>
                                         <th style="width: 25%;">Action</th>
                                     </tr>
@@ -194,7 +192,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         echo "<tr>";
                                         echo "<th scope='row'>{$count}</th>";
                                         echo (isset($uData['userNoMatric'])) ? "<td>{$uData['userNoMatric']}</td>" : "";
-                                        echo "<td>{$uData['username']}</td>";
+                                        echo "<td>{$uData['name']}</td>";
                                         echo "<td>{$uData['email']}</td>";
                                         echo "<td class='text-center'><div class='btn-group' role='group'><a href='?view={$_GET['view']}&action=edit&id={$uData['id']}' class='btn btn-success' role='button'>Edit</a><a href='?view={$_GET['view']}&action=delete&id={$uData['id']}' class='btn btn-danger btn-delete' role='button'>Delete</a></div></td>";
                                         echo "</tr>";

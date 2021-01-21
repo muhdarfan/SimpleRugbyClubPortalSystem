@@ -6,42 +6,41 @@ $MSG = array();
 
 if (isset($_POST['name']) && isset($_POST['stud_id']) && isset($_POST['email']) && isset($_POST['phone'])) {
     $Email = htmlspecialchars($_POST['email']);
-    $User = htmlspecialchars($_POST['name']);
+    $Name = htmlspecialchars($_POST['name']);
     $Matric = htmlspecialchars($_POST['stud_id']);
     $Phone = htmlspecialchars($_POST['phone']);
 
-    if (!(empty($User) || empty($Matric) || empty($Pass) || empty($Pass2) || empty($Phone))) {
+    if (!(empty($Name) || empty($Matric) || empty($Phone))) {
         if (!filter_var($Email, FILTER_VALIDATE_EMAIL)) {
-
-        } elseif (strlen($User) < 4 || strlen($User) > 32) {
-
+            $MSG = array('danger', 'Please enter a valid email address');
+        } elseif (strlen($Name) < 3 || strlen($Name) > 64) {
+            $MSG = array('danger', "Name must be more than 4 characters long.");
         } else {
-
-            /*
-            $DB->where("username", $User);
             $DB->orWhere("userEmail", $Email);
             $DB->orWhere("userNoMatric", $Matric);
 
-            if (!$DB->has("tbl_users")) {
-                if ($Pass == $Pass2) {
-                    $DB->insert('tbl_users', Array(
-                        'username' => $User,
-                        'userNoMatric' => $Matric,
-                        'userEmail' => $Email,
-                        'userPass' => $Pass,
-                        'userPhone' => $Phone,
-                    ));
-                    $MSG = Array('success', "Your account has been created! Please sign in to continue...");
+            if (!$DB->has("tbl_application")) {
+                $stmt = $DB->insert('tbl_application', array(
+                    'name' => $Name,
+                    'userNoMatric' => $Matric,
+                    'userEmail' => $Email,
+                    'userPhone' => "60" . $Phone,
+                ));
+
+                if ($stmt) {
+                    $_SESSION['success'] = true;
+                    header("LOCATION: {$_SERVER['PHP_SELF']}?result=success");
+                    exit();
                 } else {
-                    $MSG = Array("danger", "Password is mismatch!");
+                    print_r($DB->trace);
+                    $MSG = array('danger', "An error has been occurred while querying. Contact administrator.");
                 }
             } else {
-                $MSG = Array("danger", "Username/Email/Matric has already been used!");
+                $MSG = array("danger", "You already submitted an application!");
             }
-            */
         }
     } else {
-        $MSG = array("danger", "Username/Password can't be empty!");
+        $MSG = array("danger", "Please fill in the blanks.");
     }
 }
 ?>
@@ -72,6 +71,12 @@ if (isset($_POST['name']) && isset($_POST['stud_id']) && isset($_POST['email']) 
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
                     <?php
+                    if (isset($_SESSION['success'])) {
+                        echo "<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close'' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+						Your application has been submitted! Thank you for registering...</div>";
+                        unset($_SESSION['success']);
+                    }
+
                     if (!empty($MSG)) {
                         echo "<div class='alert alert-{$MSG[0]} alert-dismissible' role='alert'><button type='button' class='close'' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
 						{$MSG[1]}</div>";
@@ -92,8 +97,13 @@ if (isset($_POST['name']) && isset($_POST['stud_id']) && isset($_POST['email']) 
                             <span class="glyphicon glyphicon-qrcode form-control-feedback" aria-hidden="true"></span>
                         </div>
                         <div class="form-group has-feedback">
-                            <input type="text" class="form-control" name="phone" placeholder="Phone Number" required>
-                            <span class="glyphicon glyphicon-phone form-control-feedback" aria-hidden="true"></span>
+                            <div class="input-group">
+                                <span class="input-group-addon">+60</span>
+                                <input type="text" class="form-control" name="phone" placeholder="Phone Number"
+                                       required>
+                                <span class="glyphicon glyphicon-phone form-control-feedback" aria-hidden="true"></span>
+                            </div>
+
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-lg btn-primary">Register</button>

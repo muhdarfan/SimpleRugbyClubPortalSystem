@@ -29,14 +29,14 @@ $ID = intval($_GET['id']);
 			<input type="password" class="form-control" id="inputPassword" name="ePassword" placeholder="Password" value="<?php echo $User['adminPass']; ?>" required>
 		</div>
 		<?php
-	} elseif ($_GET['view'] == 'user') {
+	} elseif ($_GET['view'] == 'application') {
 		$DB->where('userID', $ID);
-		$User = $DB->getOne('tbl_users');
+		$User = $DB->getOne('tbl_application');
 
 		?>
 		<div class="form-group">
 			<label for="inputUsername">Username</label>
-			<input type="text" class="form-control" id="inputUsername" name="eUsername" placeholder="Username" value="<?php echo $User['username']; ?>" required>
+			<input type="text" class="form-control" id="inputUsername" name="eName" placeholder="Full Name" value="<?php echo $User['name']; ?>" required>
 		</div>
 
 		<div class="form-group">
@@ -47,11 +47,6 @@ $ID = intval($_GET['id']);
 		<div class="form-group">
 			<label for="inputEmail">Email</label>
 			<input type="email" class="form-control" id="inputEmail" name="eEmail" placeholder="Email" value="<?php echo $User['userEmail']; ?>" required>
-		</div>
-
-		<div class="form-group">
-			<label for="inputPassword">Password</label>
-			<input type="password" class="form-control" id="inputPassword" name="ePassword" placeholder="Password" value="<?php echo $User['userPass']; ?>" required>
 		</div>
 
 		<div class="form-group">

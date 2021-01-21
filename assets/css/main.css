@@ -71,13 +71,13 @@ body {
     .container {
         max-width: 930px;
     }
-    
+
 }
 
 .header {
     min-height: 120px;
     background-color: #9fc1df;
-    color: #fff;
+    color: #394856;
 }
 
 .header img {
